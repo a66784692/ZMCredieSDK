@@ -1,9 +1,8 @@
 Pod::Spec.new do |spec|
   spec.name             = 'ZMCreditSDK'
   spec.version          = '0.0.1'
-  spec.license          = { :type => 'MIT' }
   spec.homepage         = 'https://github.com/a66784692/ZMCredieSDK'
-  spec.authors          = { 'xhuatang' => 'xhuatang@linewell.com' }
+  spec.authors          = { 'zjingbo' => 'a66784692@qq.com' }
   spec.summary          = '人脸识别 SDK'
   spec.source           = { :git => 'https://github.com/a66784692/ZMCredieSDK.git', :tag => '0.0.1' }
   spec.license = { :type => 'Apache License, Version 2.0', :text => <<-LICENSE
@@ -22,7 +21,6 @@ LICENSE
      sss.resource                = 'ZMCreditSDK/ZMCreditBundle.bundle'
      sss.ios.vendored_frameworks = 'ZMCreditSDK/**/*.framework'
      sss.ios.libraries = 'z','c++.1','c++abi','stdc++.6.0.9'
-     sss.frameworks = 'APBToygerFacade','APPSecuritySDK','APMobileRPC','BioAuthAPI','ZolozIdentityManager','ZolozSensorServices','BioAuthEngine','MPRemoteLogging','CoreGraphics','AssetsLibrary','CoreTelephony','QuartzCore','CoreFoundation','CoreLocation','ImageIO','CoreMedia','CoreMotion','AVFoundation','Accelerate'
   end
   spec.prepare_command = <<-EOF
 # 创建Module
