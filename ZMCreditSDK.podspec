@@ -1,11 +1,11 @@
 Pod::Spec.new do |spec|
   spec.name             = 'ZMCreditSDK'
-  spec.version          = '2.0.0'
+  spec.version          = '0.0.1'
   spec.license          = { :type => 'MIT' }
-  spec.homepage         = 'http://192.168.202.61:19090/root/linewell-specs'
+  spec.homepage         = 'https://github.com/a66784692/ZMCredieSDK'
   spec.authors          = { 'xhuatang' => 'xhuatang@linewell.com' }
   spec.summary          = '人脸识别 SDK'
-  spec.source           = { :git => 'git@192.168.202.61:root/ZMCreditSDK.git', :tag => '2.0.0' }
+  spec.source           = { :git => 'https://github.com/a66784692/ZMCredieSDK.git', :tag => '0.0.1' }
   spec.subspec 'ZMCreditSDKVendor' do |sss|
      sss.resource                = 'ZMCreditSDK/ZMCreditBundle.bundle'
      sss.ios.vendored_frameworks = 'ZMCreditSDK/**/*.framework'
