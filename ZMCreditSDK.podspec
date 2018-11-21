@@ -1,10 +1,10 @@
 Pod::Spec.new do |spec|
   spec.name             = 'ZMCreditSDK'
-  spec.version          = '0.0.1'
+  spec.version          = '0.0.3'
   spec.homepage         = 'https://github.com/a66784692/ZMCredieSDK'
   spec.authors          = { 'zjingbo' => 'a66784692@qq.com' }
   spec.summary          = '人脸识别 SDK'
-  spec.source           = { :git => 'https://github.com/a66784692/ZMCredieSDK.git', :tag => '0.0.1' }
+  spec.source           = { :git => 'https://github.com/a66784692/ZMCredieSDK.git', :tag => '0.0.3' }
   spec.license = { :type => 'Apache License, Version 2.0', :text => <<-LICENSE
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
