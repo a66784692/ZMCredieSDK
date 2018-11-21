@@ -1,0 +1,81 @@
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+window.ZMJSBridge || function () {
+    var pool = {};
+    window.ZMJSBridge = {
+        /**
+         * 调用native 方法
+         * @param {*} action 方法名
+         * @param {*} data 参数
+         * @param {*} callback 回调方法
+         */
+    call: function call(action, data, callback) {
+        if (typeof action !== 'string') {
+            return;
+        }
+        
+        if (typeof data === 'function') {
+            callback = data;
+            data = null;
+        } else if ((typeof data === 'undefined' ? 'undefined' : _typeof(data)) !== 'object') {
+            data = null;
+        }
+        
+        var eventId = '' + new Date().getTime() + Math.random();
+        if (typeof callback === 'function') {
+            pool[eventId] = callback;
+        }
+        var msg = JSON.stringify({
+                                 action: action,
+                                 data: data,
+                                 eventId: eventId
+                                 });
+        this.iframeCall(msg);
+    },
+    iframeCall: function iframeCall(paramStr) {
+        var iframe = document.createElement("iframe");
+        iframe.style.width = "1px";
+        iframe.style.height = "1px";
+        iframe.style.display = "none";
+        iframe.src = "zmbridge://callNativeFunc?" + paramStr;
+        var parent = document.body || document.documentElement;
+        parent.appendChild(iframe);
+        setTimeout(function () {
+            parent.removeChild(iframe);
+                   }, 0);
+    },
+    callback: function callback(response) {
+        var eventId = response.eventId,
+        data = response.data;
+        
+        var func = pool[eventId];
+        delete pool[eventId];
+        
+        if (typeof func === 'function') {
+            setTimeout(function () {
+                       func(data);
+                       }, 1);
+        }
+    }
+    };
+    
+    // 通知JS 已经获得了bridge
+    var readyEvent = document.createEvent('Events');
+    readyEvent.initEvent('ZMJSBridgeReady', 0, 0);
+    var addEventListenerMethod = document.addEventListener;
+    document.addEventListener = function (eventType, callback) {
+        for (var _len = arguments.length, args = Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+            args[_key - 2] = arguments[_key];
+        }
+        
+        if (eventType === readyEvent.type) {
+            setTimeout(function () {
+                       callback(readyEvent);
+                       }, 1);
+        }
+        addEventListenerMethod.apply(document, eventType, callback, args);
+    };
+    document.dispatchEvent(readyEvent);
+}();
